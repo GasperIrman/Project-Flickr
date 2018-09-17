@@ -3,9 +3,12 @@
 
 
 <form id="login" method="post" action="./PHP/login_check.php">
-	Email: <input type="text" name="email"><br><br>
-	Password: <input type="text" name="password"><br><br>
-	<input type="submit">
+	<br>
+	<table>
+		<tr><td>Email:</td><td><input type="text" name="email"></td></tr><tr></tr>
+	 	<tr><td>Password:</td><td><input type="text" name="password"></td></tr>
+	<tr><td><input type="submit"></td></tr>
+</table>
 </form>
 <br>
 <?php
