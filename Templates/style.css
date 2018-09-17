@@ -1,8 +1,12 @@
-.nav{
-	width: 10%;
+#menu {
+	
+}
+#menulist{
+	list-style-type: none;
+}
+#menulist.li{
 	float:left;
 }
-
-#login{
-	clear:left;
+.nav{
+font-size: 50%;
 }
