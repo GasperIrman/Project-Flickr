@@ -11,11 +11,3 @@
 </table>
 </form>
 <br>
-<?php
-
-$query = "SELECT name FROM users";
-$stmt = $pdo->prepare($query);
-$stmt->execute();
-$row = $stmt->fetch();
-echo $row['name'];
-?>
