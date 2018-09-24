@@ -7,7 +7,7 @@
     	$search = $_GET['s'];
     	if($search[0] == '#')
     	{
-    		$query = "SELECT * FROM posts p INNER JOIN posts_tags pt ON pt.post_id = p.id INNER JOIN tags t ON t.id = pt.tag_id WHERE tag = '".$search."'";
+    		$query = "SELECT * FROM posts p INNER JOIN posts_tags pt ON pt.post_id = p.id INNER JOIN tags t ON t.id = pt.tag_id WHERE tag = '".substr($search, 1)."'";
     		    $stmt = $pdo->prepare($query);
     			$stmt->execute();
 
