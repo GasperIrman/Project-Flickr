@@ -78,11 +78,13 @@ if(isset($_POST["submit"]) && $_FILES["file"]["tmp_name"] != NULL)
 
     else 
     {
-        echo "File is not an image.";
+        //echo "File is not an image.";
         //NOT OK
+        header("Location: ../upload.php");
     }
 }
 else
 {
-	echo "Choose a file pls";
+	//echo "Choose a file";
+	header("Location: ../upload.php");
 }
