@@ -1,5 +1,6 @@
 <?php 	require_once('./Connection/database.php');
-		require_once('./Connection/session.php');?>
+		require_once('./Connection/session.php');
+	?>
 <!DOCTYPE html>
 <html>
 	<head>
