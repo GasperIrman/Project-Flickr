@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Gostitelj: 127.0.0.1
--- Čas nastanka: 11. sep 2018 ob 09.14
--- Različica strežnika: 10.1.22-MariaDB
--- Različica PHP: 7.1.4
+-- Host: 127.0.0.1
+-- Generation Time: Sep 24, 2018 at 01:44 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Zbirka podatkov: `flickr clone`
+-- Database: `flickr clone`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -39,7 +39,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `follows`
+-- Table structure for table `follows`
 --
 
 CREATE TABLE `follows` (
@@ -49,15 +49,22 @@ CREATE TABLE `follows` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `follows`
+--
+
+INSERT INTO `follows` (`id`, `user_id`, `follower_id`, `date`) VALUES
+(1, 2, 1, '2018-09-24 10:00:20');
+
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `posts`
+-- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `url` varchar(20) DEFAULT NULL,
+  `url` varchar(50) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `title` varchar(15) DEFAULT NULL,
   `description` varchar(50) DEFAULT NULL,
@@ -67,7 +74,7 @@ CREATE TABLE `posts` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `posts_tags`
+-- Table structure for table `posts_tags`
 --
 
 CREATE TABLE `posts_tags` (
@@ -79,7 +86,7 @@ CREATE TABLE `posts_tags` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `ratings`
+-- Table structure for table `ratings`
 --
 
 CREATE TABLE `ratings` (
@@ -93,7 +100,7 @@ CREATE TABLE `ratings` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -105,7 +112,7 @@ CREATE TABLE `tags` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -113,17 +120,25 @@ CREATE TABLE `users` (
   `auth_token` varchar(512) DEFAULT NULL,
   `name` varchar(15) DEFAULT NULL,
   `surname` varchar(15) DEFAULT NULL,
-  `email` varchar(20) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `birthday` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Indeksi zavrženih tabel
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `auth_token`, `name`, `surname`, `email`, `password`, `birthday`) VALUES
+(1, NULL, 'Gašper', 'Irman', 'gasper.irman@gmail.com', 'test', '2000-10-02 00:00:00'),
+(2, NULL, 'Luka', 'Copar', 'luka.copar@gmail.com', 'test', '2000-08-02 00:00:00');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indeksi tabele `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD UNIQUE KEY `id` (`id`),
@@ -131,7 +146,7 @@ ALTER TABLE `comments`
   ADD KEY `post_id` (`post_id`);
 
 --
--- Indeksi tabele `follows`
+-- Indexes for table `follows`
 --
 ALTER TABLE `follows`
   ADD PRIMARY KEY (`id`),
@@ -140,14 +155,14 @@ ALTER TABLE `follows`
   ADD KEY `follower_id` (`follower_id`);
 
 --
--- Indeksi tabele `posts`
+-- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indeksi tabele `posts_tags`
+-- Indexes for table `posts_tags`
 --
 ALTER TABLE `posts_tags`
   ADD PRIMARY KEY (`id`),
@@ -156,7 +171,7 @@ ALTER TABLE `posts_tags`
   ADD KEY `tag_id` (`tag_id`);
 
 --
--- Indeksi tabele `ratings`
+-- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
   ADD PRIMARY KEY (`id`),
@@ -165,58 +180,65 @@ ALTER TABLE `ratings`
   ADD KEY `post_id` (`post_id`);
 
 --
--- Indeksi tabele `tags`
+-- Indexes for table `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indeksi tabele `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- AUTO_INCREMENT zavrženih tabel
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT tabele `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT tabele `follows`
+-- AUTO_INCREMENT for table `follows`
 --
 ALTER TABLE `follows`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT tabele `posts`
+-- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
 --
--- AUTO_INCREMENT tabele `posts_tags`
+-- AUTO_INCREMENT for table `posts_tags`
 --
 ALTER TABLE `posts_tags`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT tabele `ratings`
+-- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT tabele `tags`
+-- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT tabele `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
