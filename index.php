@@ -30,7 +30,7 @@
 		    for($i = 0; $i<$stmt->rowCount(); $i++)
 		    {
     			echo '<div style="text-align: left; margin-top: 50px; margin-botom: 50px">
-    			<p><a>'.$line['name'].' '.$line['surname'].'</a></p></div>';
+    			<p><a href="profile.php?username='.$line['username'].'">'.$line['name'].' '.$line['surname'].'</a></p></div>';
 		    	$line = $stmt->fetch();
 		    }
 
@@ -44,7 +44,7 @@
     	$line = $stmt->fetch();
 	    for($i = 0; $i<$stmt->rowCount(); $i++)
 	    {
-	    	echo '<div style="text-align: center; margin-top: 50px; margin-botom: 50px"><img width="600" src="'.$line['url'].'" alt="Image missing">
+	    	echo '<div style="text-align: center; margin-top: 50px; margin-botom: 50px"><h3 style="text-align: left">'.$line['title'].'</h3><img width="600" src="'.$line['url'].'" alt="Image missing">
 	    	<p style="text-align: left">Description: '.$line['description'].'</p>
 	    	</div>';
 	    	$line = $stmt->fetch();
