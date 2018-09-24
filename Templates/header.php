@@ -12,17 +12,20 @@
 				<li><div class="nav py-2 d-none d-md-inline-block"><a href="index.php">Home</a></div></li>
 				 
 						<?php if(isset($_SESSION['user_id'])){echo '<li><div class="nav py-2 d-none d-md-inline-block"><a href="upload.php">Upload</a></div></li>';}
-								else {} ?>
+								?>
 								
 				
-					<li id="hello"><div class="nav py-2 d-none d-md-inline-block"> 
-						<?php if(isset($_SESSION['user_id'])){echo "Hello ".$_SESSION['name'];}
-								else {echo '<a href="login.php">Log in</a>';} ?>
-								</div></li>
-
+				<li id="hello"><div class="nav py-2 d-none d-md-inline-block"> 
+					<?php if(isset($_SESSION['user_id'])){echo "Hello ".$_SESSION['name'];}
+							else {echo '<a href="login.php">Log in</a>';} ?>
+							</div></li>
 				<li id="logout"><div class="nav py-2 d-none d-md-inline-block">
 					<?php if(isset($_SESSION['user_id'])) echo'<a href="PHP/logout.php">Logout</a>'; else echo '<a href="register.php">Sign up</a>'?>
 						</div></li>
+				<li id="logout"><div class="nav py-2 d-none d-md-inline-block">
+					<?php if(isset($_SESSION['user_id'])) echo'<form action="index.php"><input name="s" type="text" placeholder="Search.."></form>';?>
+						</div></li>
+
 			</ul>
 		</nav>
 	<div id="content"></body>
