@@ -24,6 +24,7 @@
 			$_SESSION['user_id'] = $res["id"];
             $_SESSION['name'] = $res["name"];
             $_SESSION['surname'] = $res["surname"];
+            $_SESSION['username'] = $res["username"];
 
             header('Location: ../index.php');
 		}
