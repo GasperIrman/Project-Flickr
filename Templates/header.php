@@ -16,7 +16,7 @@
 								
 				
 				<li id="hello"><div class="nav py-2 d-none d-md-inline-block"> 
-					<?php if(isset($_SESSION['user_id'])){echo "Hello ".$_SESSION['name'];}
+					<?php if(isset($_SESSION['user_id'])){echo "Hello <a href=\"profile.php?username=".$_SESSION['username']."\">".$_SESSION['name']."</a>";}
 							else {echo '<a href="login.php">Log in</a>';} ?>
 							</div></li>
 				<li id="logout"><div class="nav py-2 d-none d-md-inline-block">
