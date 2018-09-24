@@ -5,12 +5,28 @@
 
 	if(isset($_POST['tags']))
 	{
-		$tags[] = explode(" ", $_POST['tags']);
+		$tags = explode(" ", $_POST['tags']);
+	}
+	foreach($tags as $tag) {
+		$query = "SELECT * FROM tags WHERE tag = ?";
+		$stmt = $pdo->prepare($query);
+		$stmt->execute([$tag]);
+		$return = $stmt->rowCount();
+		echo "Found tag!! ".$tag."<br>";
+		echo $return."<br>";
+		if($return == 0)
+		{
+			$query = "INSERT INTO tags (tag) VALUES ('$tag')";
+			$stmt = $pdo->query($query);
+			//$stmt->execute([$tag]);
+			echo "Inserted tag!! <br>";
+		}
 	}
 	$allowedFileTypes = ['jpg', 'png', 'jpeg', 'gif'];
 	$targetDir = dirname(getcwd(), 1).'\Uploads';
 	$targetFile = $targetDir;
 	$url = 'Uploads';
+	$url1 = 'Uploads\\';
 	$fileType = strtolower(pathinfo($targetDir.basename($_FILES['file']['name']),PATHINFO_EXTENSION));
 	$fileName = basename($_FILES['file']['name']);
 
@@ -34,19 +50,27 @@ if(isset($_POST["submit"]) && $_FILES["file"]["tmp_name"] != NULL)
 	        	$numPosts++;
 	        	$targetFile .= "\img".$numPosts.".".$fileType;
 	        	$url .= "\img".$numPosts.".".$fileType;
+	        	$url1 .= "\img".$numPosts.".".$fileType;
+	        	echo $url;
+	        	$queryTags = "INSERT INTO posts_tags (post_id, tag_id) VALUES ((SELECT id FROM posts WHERE url = '$url1'), (SELECT id FROM tags WHERE tag = ?))";
 	        	if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) 
 	        	{
 			        echo "The file ". basename( $_FILES["file"]["name"]). " has been uploaded.";
-			        $query = "INSERT INTO posts (url, title, description, user_id) VALUES (?, ?, 'test za zdj', '1');";
+			        $query = "INSERT INTO posts (url, title, description, user_id) VALUES (?, ?, ?, ?);";
 			        $stmt = $pdo->prepare($query);
-			        $stmt->execute([$url, $fileName]);
+			        $stmt->execute([$url, $_POST['title'], $_POST['description'], $_SESSION['user_id']]);
+
+			        $stmt1 = $pdo->prepare($queryTags);
+			        foreach($tags as $tag) {
+			        	$stmt1->execute([$tag]);
+			    	}
 			        header('Location: ../index.php');
 			    } 
 
 			    else 
 			    {
 			        echo "<script> alert(Sorry, there was an error uploading your file.)</scritp";
-			        header('Location: ../index.php');
+			       header('Location: ../index.php');
 			    }
 	        }
 	    }
