@@ -42,8 +42,8 @@ if(!isset($me))
 
 <?php echo $line['username']."<br>".$line['name']." ".$line['surname']; 
 //Check za follow gumb
-if(!isset($me) && $follow == false) echo '<form method="post"><input name="follow" type="submit" value="Follow"></form>';
-else if(!isset($me) && $follow == true) echo '<form method="post"><input name="unfollow" type="submit" value="Unfollow"></form>';
+if(!isset($me) && $follow == false) echo '<form method="post" style"float: right"><input name="follow" type="submit" value="Follow"></form>';
+else if(!isset($me) && $follow == true) echo '<form method="post"  style"float: right"><input name="unfollow" type="submit" value="Unfollow"></form>';
 
 //Objave profila
 $query = "SELECT * FROM posts WHERE user_id = (SELECT id FROM users WHERE username = ?) ORDER BY date DESC";
