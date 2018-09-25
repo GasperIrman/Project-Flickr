@@ -10,6 +10,7 @@
 		<tr><td>Surname:</td><td><input type="text" name="surname"></td></tr><tr></tr>
 		<tr><td>Email:</td><td><input type="text" name="email"></td></tr><tr></tr>
 	 	<tr><td>Password:</td><td><input type="text" name="password"></td></tr>
+	 	<tr><td>Birthday:</td><td><input type="date" name="birth"></td></tr>
 	<tr><td><input type="submit" value="Register"></td></tr>
 </table>
 </form>
