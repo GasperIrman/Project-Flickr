@@ -5,9 +5,9 @@
 <form action="PHP/uploadImg.php" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="file" id="fileToUpload"><br>
-    Tags: <input type="text" name="tags"><br>
-    Title: <input type="text" name="title"><br>
-    Description: <input type="text" name="description"><br>
+    <input type="text" placeholder="Tags (separate with spaces)" name="tags"><br>
+    <input type="text" placeholder="Image title" name="title"><br>
+    <input type="text" placeholder="Image description" name="description"><br>
     <input type="submit" value="Upload Image" name="submit">
 
 </form>
