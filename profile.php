@@ -47,19 +47,15 @@ else if(!isset($me) && $follow == true) echo '<form method="post"  style"float: 
 
 //Objave profila
 $query = "SELECT * FROM posts WHERE user_id = (SELECT id FROM users WHERE username = ?) ORDER BY date DESC";
-$stmt1 = $pdo->prepare($query);
-$stmt1->execute([$_GET['username']]);
+$stmt = $pdo->prepare($query);
+$stmt->execute([$_GET['username']]);
 
-//Popravit ker učasih gre prevečkrat čez
-if($line = $stmt1->fetch())
+for($i = 0; $i<$stmt->rowCount(); $i++)
 {
-	for($i = 0; $i<$stmt1->rowCount(); $i++)
-	{
+		$line = $stmt->fetch();
 	    	echo '<div style="text-align: center; margin-top: 50px; margin-botom: 50px"><h3 style="text-align: left">'.$line['title'].'</h3><img width="600" src="'.$line['url'].'" alt="Image missing">
 	    	<p style="text-align: left">Description: '.$line['description'].'</p>
 	    	</div>';
-		$line = $stmt->fetch();
-	}
 }
 
 ?>

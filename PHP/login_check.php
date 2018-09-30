@@ -6,7 +6,7 @@
 	
 	$user = $_POST['email'];
 	$pass = $_POST['password'];
-	//echo $user."<br>".$pass;
+	//$pass = sha($pass1);
 
 	if(!empty($user) && !empty($pass))
 	{
@@ -25,7 +25,10 @@
             $_SESSION['name'] = $res["name"];
             $_SESSION['surname'] = $res["surname"];
             $_SESSION['username'] = $res["username"];
+            if($res['admin'])$_SESSION['admin'] = true;
+            else $_SESSION['admin'] = false;
 
+            $query = "UPDATE users SET last_login = date('YYYY-MM-DD-HH-mm-SS')";
             header('Location: ../index.php');
 		}
 	}
