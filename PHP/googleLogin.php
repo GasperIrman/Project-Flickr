@@ -25,6 +25,7 @@ if(empty($line))
             $_SESSION['name'] = $line["name"];
             $_SESSION['surname'] = $line["surname"];
             $_SESSION['username'] = $name;
+            $_SESSION['token'] = $id;
 
             header("Location: ../index.php");
 ?>

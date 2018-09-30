@@ -14,13 +14,17 @@
 </form>
 <!-- Google login -->
 <br>Log in with Google<br>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-<script>
+<?php if(!isset($_SESSION['token']))
+{
+	echo '<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<script>
 function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
 	var url = "PHP/googleLogin.php?id="+profile.getId()+"&name="+profile.getName()+"&email="+profile.getEmail();
 	window.location.href = url;
 }
 
-</script>
+</script>';
+}
+?>
+
