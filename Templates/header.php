@@ -21,12 +21,27 @@
 							else {echo '<a style="text-decoration: none" href="login.php">Log in</a>';} ?>
 							</div></li>
 				<li id="logout"><div class="nav py-2 d-none d-md-inline-block">
-					<?php if(isset($_SESSION['user_id'])) echo'<a style="text-decoration: none" href="PHP/logout.php">Logout</a>'; else echo '<a style="text-decoration: none" href="register.php">Sign up</a>'?>
+					<?php 
+					if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
+						echo'<a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://projekt1.girman.eu/Flickr/PHP/logout.php"  onclick="signOut();">Sign out</a>';
+					} 
+					else if(isset($_SESSION['user_id'])) echo'<a style="text-decoration: none" href="PHP/logout.php">Logout</a>'; else echo '<a style="text-decoration: none" href="register.php">Sign up</a>'?>
 						</div></li>
 				<li id="search" style="width: 20%"><div class="nav py-2 d-none d-md-inline-block">
-					<?php if(isset($_SESSION['user_id'])) echo'<form action="index.php"><input name="s" type="text" id="query" placeholder="Search.."></form>';?>
+					<?php 
+					if(isset($_SESSION['user_id']))
+						{
+							echo'<form action="index.php"><input name="s"type="text" id="query" placeholder="Search.."></form>';
+					}
+					?>
 						</div></li>
 
 			</ul>
-		</nav>
+		</nav>	
+		
+	<script>
+	  function signOut() {
+gapi.auth.signOut();
+}
+</script>
 	<div id="content"></body>
