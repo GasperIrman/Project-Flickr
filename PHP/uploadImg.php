@@ -6,6 +6,7 @@
 	if(isset($_POST['tags']))
 	{
 		$tags = explode(" ", $_POST['tags']);
+		$tags1 = explode(" ", $_POST['tags']);
 	}
 	foreach($tags as $tag) {
 		$query = "SELECT * FROM tags WHERE tag = ?";
@@ -23,10 +24,10 @@
 		}
 	}
 	$allowedFileTypes = ['jpg', 'png', 'jpeg', 'gif'];
-	$targetDir = dirname(getcwd(), 1).'\Uploads';
+	$targetDir = dirname(getcwd(), 1).'/Uploads';
 	$targetFile = $targetDir;
-	$url = 'Uploads';
-	$url1 = 'Uploads\\';
+	$url = 'https://localhost/FlickrTest/Uploads';
+	$url1 = 'Flickr/Uploads/';
 	$fileType = strtolower(pathinfo($targetDir.basename($_FILES['file']['name']),PATHINFO_EXTENSION));
 	$fileName = basename($_FILES['file']['name']);
 
@@ -48,28 +49,30 @@ if(isset($_POST["submit"]) && $_FILES["file"]["tmp_name"] != NULL)
 	        	$numPosts = $stmt->fetchColumn();
 	        	//echo $numPosts;
 	        	$numPosts++;
-	        	$targetFile .= "\img".$numPosts.".".$fileType;
-	        	$url .= "\img".$numPosts.".".$fileType;
-	        	$url1 .= "\img".$numPosts.".".$fileType;
-	        	echo $url;
-	        	$queryTags = "INSERT INTO posts_tags (post_id, tag_id) VALUES ((SELECT id FROM posts WHERE url = '$url1'), (SELECT id FROM tags WHERE tag = ?))";
+	        	$targetFile .= "/img".$numPosts.".".$fileType;
+	        	$url .= "/img".$numPosts.".".$fileType;
+	        	$url1 .= "/img".$numPosts.".".$fileType;
+	        	echo "<br>".$url;
+
+	        	$queryTags = "INSERT INTO posts_tags (post_id, tag_id) VALUES ((SELECT id FROM posts WHERE url = '$url'), (SELECT id FROM tags WHERE tag = ?))";
+
 	        	if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) 
 	        	{
 			        echo "The file ". basename( $_FILES["file"]["name"]). " has been uploaded.";
 			        $query = "INSERT INTO posts (url, title, description, user_id) VALUES (?, ?, ?, ?);";
 			        $stmt = $pdo->prepare($query);
 			        $stmt->execute([$url, $_POST['title'], $_POST['description'], $_SESSION['user_id']]);
-
-			        $stmt1 = $pdo->prepare($queryTags);
-			        foreach($tags as $tag) {
-			        	$stmt1->execute([$tag]);
+			      	$stmt1 = $pdo->prepare($queryTags);
+			      foreach($tags1 as $tag) {
+			      	echo "<br>".$url;
+			        $stmt1->execute([$tag]);
+					echo $tag."<br>";
 			    	}
 			        header('Location: ../index.php');
 			    } 
 
 			    else 
 			    {
-			        echo "<script> alert(Sorry, there was an error uploading your file.)</scritp";
 			       header('Location: ../index.php');
 			    }
 	        }
