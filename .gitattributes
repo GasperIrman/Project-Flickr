@@ -1,1 +1,2 @@
+$ cat .gitattributes
 assets/* linguist-vendored
